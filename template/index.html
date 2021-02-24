@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>k8s overview - Report generated via kubectl</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="template/styles.css">
+    </head>
+  
+  <body translate="no">
+  <table class="top-table">
+    <thead>
+      <tr>
+        <th class="resource-type">Pods</th>
+        <th class="resource-type">Deployments</th>
+        <th class="resource-type">Cronjobs</th>
+        <th class="resource-type">Statefulsets</th>
+        <th class="resource-type">Services</th>
+        <th class="resource-type">Ingresses</th>
+      </tr>
+    </thead>
+    <tbody>
+        {{#each this}}
+        <tr>
+            <td colspan="6" class="context">{{@key}}</td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <table>
+                    <tr>
+                    {{#each this.hpa}}
+                        <td class="hpa-status-{{this.status}} hpa">{{this.name}}<br /><progress value="{{substract this.replicas this.minpods}}" max="{{substract this.maxpods this.minpods}}" data-label="{{this.replicas}} pods ({{this.minpods}} - {{this.maxpods}})"></progress></td>
+                    {{/each}}
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td><ul>{{#each this.groupedPods}}<li class="pod-status-{{this.status}} {{#if this.unexpected}}pod-status-unexpected{{/if}}">{{this.name}} ({{this.ready.available}}/{{this.ready.total}})</li>{{/each}}</ul></td>
+            <td><ul>{{#each this.deployment}}<li class="pod-status-{{this.available}}">{{this.name}} ({{this.ready}})</li>{{/each}}</ul></td>
+            <td><ul>{{#each this.cronjob}}<li>{{this.name}}</li>{{/each}}</ul></td>
+            <td><ul>{{#each this.statefulset}}<li>{{this.name}} ({{this.ready}})</li>{{/each}}</ul></td>
+            <td><ul>{{#each this.service}}<li>{{this.name}}</li>{{/each}}</ul></td>
+            <td><ul>{{#each this.ingress}}<li>{{this.name}}</li>{{/each}}</ul></td>
+        </tr>
+        {{/each}}
+    </tbody>
+  </table>
+  <script>
+      document.querySelectorAll(".context").forEach(box => 
+        box.addEventListener("click", () => {
+            event.preventDefault();
+
+            var parent = event.target.parentElement
+            var next = parent.nextSibling.nextSibling;
+            var next2 = next.nextSibling.nextSibling;
+
+            next.classList.toggle('hide');
+            next2.classList.toggle('hide');
+        })
+    );
+  </script>
+  </body></html>

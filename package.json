@@ -1,0 +1,33 @@
+{
+  "name": "k8s-kubectl-html-report",
+  "version": "1.0.0",
+  "description": "k8s report in HTML via kubectl commands",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "k8s",
+    "html",
+    "kubectl",
+    "nodejs",
+    "report"
+  ],
+  "author": "Ignacio Muñoz Vicente",
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "dependencies": {
+    "handlebars": "^4.7.7",
+    "open": "^7.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}

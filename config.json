@@ -1,0 +1,25 @@
+{
+    "environments": [
+        {
+            "context": "my-context-one",
+            "namespace": "my-specific-namespace"
+        },
+        "my-context-two"
+    ],
+    "resources": [
+        "pod",
+        "deployment",
+        "cronjob",
+        "statefulset",
+        "service",
+        "hpa",
+        "ingress"
+    ],
+    "expectedResources": [
+        "my-elastic-statefulset",
+        "my-first-deployment",
+        "my-redis-instance",
+        "my-cronjob"
+    ],
+    "reportName": "report.html"
+}
